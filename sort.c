@@ -49,7 +49,7 @@ int select_sort(int *buf, int size)
 }
 
 //快速排序算法
-//void q_sork(int *buf, int left, int right)
+void q_sork(int *buf, int left, int right)
 {
     if(left >= right) return;
     
@@ -58,14 +58,23 @@ int select_sort(int *buf, int size)
     int key = buf[left];
     
     while(i < j){
+        
         while(i < j && key <= buf[j]){
             j--;
         }
         
+        if(i != j) buf[i++] = buf[j];
         
+        while(i < j && key >= buf[i]){
+            i++;
+        }
         
-    
+        if(i != j) buf[j] = buf[i];
     }
+    
+    buf[i] = key;
+    q_sort(buf, left, i - 1);
+    q_sort(buf, i + 1, right);
 }
 
 int quick_sork(int *buf, int size)
